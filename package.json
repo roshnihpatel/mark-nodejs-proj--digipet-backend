@@ -2,9 +2,10 @@
   "name": "mark-nodejs-proj--digipet-backend",
   "version": "0.0.1",
   "scripts": {
-    "start": "ts-node src",
+    "start": "node dist",
     "start:dev": "ts-node-dev src",
     "test": "jest",
+    "build":"tsc",
     "test:watch": "jest --watch"
   },
   "author": "",
