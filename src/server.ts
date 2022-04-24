@@ -30,11 +30,13 @@ app.get("/digipet", (req, res) => {
     res.json({
       message: "Your digipet is waiting for you!",
       digipet, // equivalent to digipet: digipet
+      description:"Your digipet is waiting for you!"
     });
   } else {
     res.json({
       message: "You don't have a digipet yet! Try hatching one with /hatch",
       digipet: undefined,
+      description: "You don't have a digitpet yet. Click hatch to adopt a digipet!"
     });
   }
 });
@@ -45,6 +47,7 @@ app.get("/digipet/hatch", (req, res) => {
     res.json({
       message: "You can't hatch a digipet now because you already have one!",
       digipet,
+      description: "You don't have a digitpet yet. Click hatch to adopt a digipet!"
     });
   } else {
     const digipet = hatchDigipet();
@@ -52,6 +55,8 @@ app.get("/digipet/hatch", (req, res) => {
       message:
         "You have successfully hatched an adorable new digipet. Just the cutest.",
       digipet,
+      description:"You have successfully hatched an adorable new digipet. Just the cutest."
+      
     });
   }
 });
@@ -63,11 +68,13 @@ app.get("/digipet/walk", (req, res) => {
     res.json({
       message: "You walked your digipet. It looks happier now!",
       digipet: getDigipet(),
+      description:"You walked your digipet. It looks happier now!"
     });
   } else {
     res.json({
       message:
         "You don't have a digipet to walk! Try hatching one with /digipet/hatch",
+        description: "You don't have a digitpet yet. Click hatch to adopt a digipet!"
     });
   }
 });
@@ -79,11 +86,13 @@ app.get("/digipet/train", (req, res) => {
     res.json({
       message: "You trained your digipet. It is more disicplined",
       digipet: getDigipet(),
+      description: "You trained your digipet. It is more disicplined",
     });
   } else {
     res.json({
       message:
         "You don't have a digipet to train! Try hatching one with /digipet/hatch",
+      description: "You don't have a digitpet yet. Click hatch to adopt a digipet!"
     });
   }
 });
@@ -95,11 +104,13 @@ app.get("/digipet/feed", (req, res) => {
     res.json({
       message: "You fed your digipet",
       digipet: getDigipet(),
+      description:"You fed your digipet"
     });
   } else {
     res.json({
       message:
         "You don't have a digipet to feed! Try hatching one with /digipet/hatch",
+        description: "You don't have a digitpet yet. Click hatch to adopt a digipet!"
     });
   }
 });
@@ -111,11 +122,14 @@ app.get("/digipet/ignore", (req, res) => {
     res.json({
       message: "You ignored your digipet",
       digipet: getDigipet(),
+      description: "You ignored your digipet"
+
     });
   } else {
     res.json({
       message:
         "You don't have a digipet to ignore! Try hatching one with /digipet/hatch",
+        description: "You don't have a digitpet yet. Click hatch to adopt a digipet!"
     });
   }
 });
@@ -126,13 +140,15 @@ app.get("/digipet/rehome", (req, res) => {
     res.json({
       message: "You can't rehome a digipet because you don't have one!",
       digipet,
+      description: "You don't have a digitpet yet. Click hatch to adopt a digipet!"
     });
   } else {
     rehomeDigipet()
     res.json({
       message:
         "You have successfully rehomed an your digipet.",
-      digipet: undefined
+      digipet: undefined,
+      description: "You digipet has found a new home! Click hatch to adopt a new digipet"
     });
   }
 });
