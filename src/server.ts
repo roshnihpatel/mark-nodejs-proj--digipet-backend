@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { getDigipet } from "./digipet/model";
-import { hatchDigipet, walkDigipet, trainDigipet, feedDigipet, ignoreDigipet} from "./digipet/controller";
+import { hatchDigipet, walkDigipet, trainDigipet, feedDigipet, ignoreDigipet, rehomeDigipet} from "./digipet/controller";
 
 const app = express();
 
@@ -87,6 +87,7 @@ app.get("/digipet/train", (req, res) => {
     });
   }
 });
+
 app.get("/digipet/feed", (req, res) => {
   // check the user has a digipet to walk
   if (getDigipet()) {
@@ -114,7 +115,24 @@ app.get("/digipet/ignore", (req, res) => {
   } else {
     res.json({
       message:
-        "You don't have a digipet to ingnore! Try hatching one with /digipet/hatch",
+        "You don't have a digipet to ignore! Try hatching one with /digipet/hatch",
+    });
+  }
+});
+
+app.get("/digipet/rehome", (req, res) => {
+  const digipet = getDigipet();
+  if (!digipet) {
+    res.json({
+      message: "You can't rehome a digipet because you don't have one!",
+      digipet,
+    });
+  } else {
+    rehomeDigipet()
+    res.json({
+      message:
+        "You have successfully rehomed an your digipet.",
+      digipet: undefined
     });
   }
 });

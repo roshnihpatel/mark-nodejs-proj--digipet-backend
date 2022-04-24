@@ -10,13 +10,13 @@ import app from "../server";
  *  2. user is not able to rehome a digipet if they do not have one
  */
 
-describe.skip("when user has a digipet they can rehome the digipet so that they no longer have a digipet. the user cannot repeatidlt rehome, if the user currently doesnot have a digipet", () => {
+describe("when user has a digipet they can rehome the digipet so that they no longer have a digipet. the user cannot repeatedly rehome, if the user currently does not have a digipet", () => {
   // setup: ensure there is no digipet to begin with
   setDigipet(INITIAL_DIGIPET);
 
   test("1st GET /digipet gives stats of the  current digipet", async () => {
     const response = await supertest(app).get("/digipet");
-    expect(response.body.message).toMatch(/digitpet/i);
+    expect(response.body.message).toMatch(/your digipet/i);
     expect(response.body.digipet).toHaveProperty(
         "happiness",
         INITIAL_DIGIPET.happiness
@@ -36,19 +36,19 @@ describe.skip("when user has a digipet they can rehome the digipet so that they 
     const response = await supertest(app).get("/digipet/rehome");
     expect(response.body.message).toMatch(/success/i);
     expect(response.body.message).toMatch(/rehomed/i);
-    expect(response.body.digipet).not.toBeDefined()
+    expect(response.body.digipet).toBeUndefined()
   });
 
   test("2nd GET /digipet now informs them that they don't currently have a digipet", async () => {
     const response = await supertest(app).get("/digipet");
-    expect(response.body.message).toMatch(/your digipet/i);
-    expect(response.body.digipet).not.toBeDefined();
+    expect(response.body.message).toMatch(/you don't have a digipet/i);
+    expect(response.body.digipet).toBeUndefined();
   });
 
   test("2nd GET /digipet/rehome now informs them that they can't rehome as they dont have a digipet", async () => {
     const response = await supertest(app).get("/digipet/rehome");
     expect(response.body.message).not.toMatch(/success/i);
     expect(response.body.message).toMatch(/can't rehome/i);
-    expect(response.body.digipet).not.toBeDefined()
+    expect(response.body.digipet).toBeFalsy()
   });
 });
