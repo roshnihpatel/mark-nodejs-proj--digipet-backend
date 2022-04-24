@@ -10,7 +10,7 @@ import app from "../server";
  *  2. user is not able to rehome a digipet if they do not have one
  */
 
-describe("when user has a digipet they can rehome the digipet so that they no longer have a digipet. the user cannot repeatidlt rehome, if the user currently doesnot have a digipet", () => {
+describe.skip("when user has a digipet they can rehome the digipet so that they no longer have a digipet. the user cannot repeatidlt rehome, if the user currently doesnot have a digipet", () => {
   // setup: ensure there is no digipet to begin with
   setDigipet(INITIAL_DIGIPET);
 

@@ -34,7 +34,11 @@ export function trainDigipet(): void {
 
   }
 export function rehomeDigipet(): void {
-  
+  if(!getDigipet()) {
+    throw new Error("Can't rehome a digipet you don't have! ")
+  }else {
+    setDigipet(undefined)
+  }
 }
 
 export function walkDigipet(): void {

@@ -237,7 +237,7 @@ describe("action routes", () => {
 });
 
 
-describe("GET /digipet/rehome", () => {
+describe.skip("GET /digipet/rehome", () => {
   test("if the user has a digipet, it responds with a message about remoing the digipet", async () => {
     // setup: reset digipet
     setDigipet(INITIAL_DIGIPET);

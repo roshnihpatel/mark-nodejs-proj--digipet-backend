@@ -69,6 +69,7 @@ describe("hatchDigipet", () => {
     expect(() => hatchDigipet()).toThrowError();
   });
 });
+
 describe ("rehomeDigipet", () => {
   test("where there is a current digipet , it rehomes the digitpet so that the user no longer has a digipet ", () => {
     setDigipet(INITIAL_DIGIPET);
@@ -78,10 +79,10 @@ describe ("rehomeDigipet", () => {
     rehomeDigipet();
 
     // assert
-    expect(getDigipet()).not.toBeDefined();
+    expect(getDigipet()).toBeNull();
   });
   test("Where there is no digitpet it thows an error", () => {
-    setDigipet(INITIAL_DIGIPET)
+    setDigipet(undefined)
 
     expect(() => rehomeDigipet()).toThrowError()
   })
