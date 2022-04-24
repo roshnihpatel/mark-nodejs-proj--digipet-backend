@@ -4,7 +4,8 @@ import {
   hatchDigipet,
   trainDigipet,
   walkDigipet,
-  ignoreDigipet
+  ignoreDigipet,
+  rehomeDigipet
 } from "./digipet/controller";
 import { INITIAL_DIGIPET, setDigipet } from "./digipet/model";
 import app from "./server";
@@ -234,3 +235,33 @@ describe("action routes", () => {
     });
   });
 });
+
+
+describe("GET /digipet/rehome", () => {
+  test("if the user has a digipet, it responds with a message about remoing the digipet", async () => {
+    // setup: reset digipet
+    setDigipet(INITIAL_DIGIPET);
+
+    const response = await supertest(app).get("/digipet/rehome");
+
+    // response includes a relevant message
+    expect(response.body.message).toMatch(/rehome/i);
+
+    //the user no longer has a digipet
+    expect(response.body.digipet).not.toBeDefined();;
+  });
+
+  it("delegates state change to the rehomeDigipet function", async () => {
+    // setup: reset digipet and mock function
+    setDigipet(INITIAL_DIGIPET);
+    if (jest.isMockFunction(rehomeDigipet) /* type guard */) {
+      rehomeDigipet.mockReset();
+    }
+    // act
+    await supertest(app).get("/digipet/rehome");
+    // assert
+    expect(rehomeDigipet).toHaveBeenCalledTimes(1);
+  });
+});
+
+

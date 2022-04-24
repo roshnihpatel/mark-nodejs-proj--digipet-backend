@@ -33,7 +33,9 @@ export function trainDigipet(): void {
   updateDigipetBounded("happiness", -5)
 
   }
-
+export function rehomeDigipet(): void {
+  
+}
 
 export function walkDigipet(): void {
   updateDigipetBounded("happiness", 10);

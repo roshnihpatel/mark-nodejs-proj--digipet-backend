@@ -3,7 +3,8 @@ import {
   hatchDigipet,
   trainDigipet,
   walkDigipet,
-  ignoreDigipet
+  ignoreDigipet,
+  rehomeDigipet
 } from "./controller";
 import { getDigipet, INITIAL_DIGIPET, setDigipet } from "./model";
 
@@ -68,6 +69,24 @@ describe("hatchDigipet", () => {
     expect(() => hatchDigipet()).toThrowError();
   });
 });
+describe ("rehomeDigipet", () => {
+  test("where there is a current digipet , it rehomes the digitpet so that the user no longer has a digipet ", () => {
+    setDigipet(INITIAL_DIGIPET);
+    expect(getDigipet()).toStrictEqual(INITIAL_DIGIPET);
+
+    // act
+    rehomeDigipet();
+
+    // assert
+    expect(getDigipet()).not.toBeDefined();
+  });
+  test("Where there is no digitpet it thows an error", () => {
+    setDigipet(INITIAL_DIGIPET)
+
+    expect(() => rehomeDigipet()).toThrowError()
+  })
+
+})
 
 describe("trainDigipet", () => {
   it("increases digipet discipline by 10 and decreases happiness by 5", () => {
